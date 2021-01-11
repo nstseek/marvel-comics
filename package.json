@@ -6,7 +6,7 @@
     "node": ">=10.22.1"
   },
   "dependencies": {
-    "@nstseek/react-forms": "^1.1.2",
+    "@nstseek/react-forms": "^1.2.2",
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
