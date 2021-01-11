@@ -1,0 +1,17 @@
+div.Login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  h3.title {
+    color: #ddd;
+    text-align: center;
+    margin: 0;
+  }
+  div.form {
+    width: 200px;
+  }
+  button.primary {
+    width: 100px;
+  }
+}
