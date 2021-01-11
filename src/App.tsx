@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Particles, { IParticlesParams } from 'react-particles-js';
-import { Redirect, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Routes from 'routes';
 import './App.scss';
+import Login from 'pages/Login/Login';
+import Livros from 'pages/Livros/Livros';
+import LoginContext, { loginKey } from 'contexts/loginContext';
+import Cadastro from 'pages/Cadastro/Cadastro';
 
 const particlesParam: IParticlesParams = {
   particles: {
@@ -71,12 +75,45 @@ const particlesParam: IParticlesParams = {
 };
 
 const App: React.FC = () => {
+  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem(loginKey));
+  const history = useHistory();
   return (
     <div className='App'>
       <Particles className='particles' params={particlesParam} />
+      {loggedIn ? (
+        <span
+          className='logout'
+          onClick={() => {
+            sessionStorage.removeItem(loginKey);
+            setLoggedIn(false);
+            history.push(Routes.Login);
+          }}>
+          <i className='fas fa-times'></i>
+          Sair
+        </span>
+      ) : null}
       <div className='main-container'>
         <Switch>
-          <Redirect to={Routes.Home} />
+          {!loggedIn ? (
+            <>
+              <Route path={Routes.Login}>
+                <LoginContext.Provider value={{ loggedIn, setLoggedIn }}>
+                  <Login />
+                </LoginContext.Provider>
+              </Route>
+              <Redirect to={Routes.Login} />
+            </>
+          ) : null}
+          <Route path={Routes.Livros}>
+            <Livros />
+          </Route>
+          <Route path={Routes.Cadastro + '/:id'}>
+            <Cadastro />
+          </Route>
+          <Route path={Routes.Cadastro}>
+            <Cadastro />
+          </Route>
+          <Redirect to={Routes.Livros} />
         </Switch>
       </div>
     </div>
