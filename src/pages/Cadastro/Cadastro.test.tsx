@@ -42,8 +42,6 @@ let mockId = null;
 import React from 'react';
 import { mount } from 'enzyme';
 import { Cadastro, formLivroConfig } from './Cadastro';
-import { Provider } from 'react-redux';
-import { store } from 'configureStore';
 import Routes from 'routes';
 import { Livro } from 'reducers/livros';
 import createAlert from 'utils/modal-alert';
