@@ -11,9 +11,9 @@ import LivrosReducer from 'reducers/livros/livros.store';
 export type AppState = CombinedState<{
   biblioteca: LivrosState;
 }>;
-export default function configureStore() {
+export default function configureStore(defaultStore = LivrosReducer) {
   const rootReducer = combineReducers<AppState>({
-    biblioteca: LivrosReducer
+    biblioteca: defaultStore
   });
   const middlewares = process.env.NODE_ENV === 'development' ? [logger] : [];
   const store = createStore(rootReducer, applyMiddleware(...middlewares));

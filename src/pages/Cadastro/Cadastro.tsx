@@ -17,7 +17,7 @@ interface Props {
   createLivro(data: LivroBase);
 }
 
-const formLivroConfig: FormBuilder<Omit<LivroBase, 'alugado'>> = {
+export const formLivroConfig: FormBuilder<Omit<LivroBase, 'alugado'>> = {
   titulo: {
     initialValue: '',
     validators: [required('título')],
@@ -48,7 +48,7 @@ const formLivroConfig: FormBuilder<Omit<LivroBase, 'alugado'>> = {
   }
 };
 
-const Cadastro: React.FC<Props> = (props) => {
+export const Cadastro: React.FC<Props> = (props) => {
   const formLivro = useForm(formLivroConfig);
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
@@ -87,11 +87,14 @@ const Cadastro: React.FC<Props> = (props) => {
         <Form form={formLivro} onEnter={saveLivro} />
       </div>
       <div className='options'>
-        <button className='primary' onClick={saveLivro}>
+        <button className='primary' id='save-livro' onClick={saveLivro}>
           <i className='fas fa-save'></i>
           Salvar
         </button>
-        <button className='primary' onClick={() => history.push(Routes.Livros)}>
+        <button
+          className='primary'
+          id='cancel-livro'
+          onClick={() => history.push(Routes.Livros)}>
           <i className='fas fa-times'></i>
           Cancelar
         </button>

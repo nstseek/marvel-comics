@@ -18,10 +18,11 @@ interface Login {
   password: string;
 }
 
-const formLoginConfig: FormBuilder<Login> = {
+export const formLoginConfig: FormBuilder<Login> = {
   username: {
     initialValue: '',
     inputOptions: {
+      id: 'user',
       label: 'Usuário:',
       type: 'text',
       placeholder: '',
@@ -33,6 +34,7 @@ const formLoginConfig: FormBuilder<Login> = {
   password: {
     initialValue: '',
     inputOptions: {
+      id: 'password',
       label: 'Senha:',
       type: 'password',
       placeholder: '',
@@ -68,7 +70,7 @@ const Login: React.FC = () => {
       <div className='form'>
         <Form form={formLogin} onEnter={logIn} />
       </div>
-      <button className='primary' onClick={logIn}>
+      <button id='log-in' className='primary' onClick={logIn}>
         Entrar
       </button>
     </div>

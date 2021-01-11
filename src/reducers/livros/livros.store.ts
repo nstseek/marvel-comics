@@ -19,7 +19,7 @@ export interface LivrosState {
 
 let id = 1;
 
-const initialState: LivrosState = {
+export const initialState: LivrosState = {
   livros: [
     {
       id: id++,
@@ -117,7 +117,7 @@ function reducer(
             livro.id === (action?.payload?.id || action?.payload?.data?.id)
         )
       : null;
-  switch (action.type) {
+  switch (action?.type) {
     case LivrosActionTypes.CREATE_LIVRO:
       const livro = {
         ...action.payload.data,

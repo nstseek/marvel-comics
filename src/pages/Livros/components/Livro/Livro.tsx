@@ -17,7 +17,7 @@ interface Props {
   livro: LivroModel;
 }
 
-const Livro: React.FC<Props> = (props) => {
+export const Livro: React.FC<Props> = (props) => {
   const [details, setDetails] = useState(false);
 
   const history = useHistory();
@@ -42,6 +42,7 @@ const Livro: React.FC<Props> = (props) => {
         <div className='livro-options'>
           <button
             className='primary'
+            id='alugar-livro'
             onClick={(event) => {
               event.stopPropagation();
               props.livro.alugado
@@ -62,12 +63,14 @@ const Livro: React.FC<Props> = (props) => {
           </button>
           <button
             disabled={props.livro.alugado}
+            id='remover-livro'
             onClick={() => props.removerLivro(props.livro.id)}>
             <i className='fas fa-times'></i>
             Remover
           </button>
           <button
             disabled={props.livro.alugado}
+            id='editar-livro'
             onClick={() =>
               history.push(Routes.Cadastro + '/' + props.livro.id)
             }>

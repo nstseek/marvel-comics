@@ -11,7 +11,7 @@ interface Props {
   livros: LivroModel[];
 }
 
-const Livros: React.FC<Props> = (props) => {
+export const Livros: React.FC<Props> = (props) => {
   const history = useHistory();
 
   return (
@@ -19,6 +19,7 @@ const Livros: React.FC<Props> = (props) => {
       <div className='options'>
         <button
           className='primary'
+          id='livros-add'
           onClick={() => history.push(Routes.Cadastro)}>
           <i className='fas fa-plus'></i> Adicionar um livro
         </button>
