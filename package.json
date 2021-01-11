@@ -2,6 +2,9 @@
   "name": "softdesign-test",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=10.22.1"
+  },
   "dependencies": {
     "@nstseek/react-forms": "^1.1.2",
     "@testing-library/jest-dom": "^5.11.8",
