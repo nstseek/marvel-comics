@@ -18,9 +18,11 @@ jest.mock('@nstseek/react-forms', () => ({
   Form: () => formTestStr
 }));
 
-const testForm: Login = {
-  password: 'test123',
-  username: 'test@test.com'
+const testForm = {
+  value: {
+    password: 'test123',
+    username: 'test@test.com'
+  }
 };
 
 const mockUseForm = jest.fn();
@@ -39,17 +41,24 @@ const mockSetItem = jest.fn();
 
 global.sessionStorage.setItem = mockSetItem;
 
+const mockUiCtx = {
+  addModal: () => null
+} as any;
+
 import React from 'react';
 import { mount } from 'enzyme';
 import Login, { formLoginConfig } from './Login';
-import createAlert from 'utils/modal-alert';
-import Routes from 'routes';
+import { ReactUIContext } from '@nstseek/react-ui/context';
 
 describe('<Login />', () => {
   let component: ReturnType<typeof mount>;
 
   beforeEach(() => {
-    component = mount(<Login />);
+    component = mount(
+      <ReactUIContext.Provider value={mockUiCtx}>
+        <Login />
+      </ReactUIContext.Provider>
+    );
   });
 
   test('It should mount', () => {
@@ -62,15 +71,13 @@ describe('<Login />', () => {
 
   test('It should check for validity when clicking the enter button', () => {
     component.find('button#log-in').simulate('click');
-    expect(mockCheckValidity).toHaveBeenCalledWith(testForm, createAlert);
+    expect(mockCheckValidity).toHaveBeenCalledWith(
+      testForm,
+      mockUiCtx.addModal
+    );
   });
 
   test('It should build the form with the right configs', () => {
     expect(mockUseForm).toHaveBeenCalledWith(formLoginConfig);
-  });
-
-  test('It should navigate to Livros after logging in', () => {
-    component.find('button#log-in').simulate('click');
-    expect(mockPush).toHaveBeenCalledWith(Routes.Livros);
   });
 });
