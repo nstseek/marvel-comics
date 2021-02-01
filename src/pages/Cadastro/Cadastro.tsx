@@ -1,100 +1,89 @@
 import { Form, useForm } from '@nstseek/react-forms';
 import { FormBuilder } from '@nstseek/react-forms/hooks/form';
 import { checkValidity, required } from '@nstseek/react-forms/validators';
-import { AppState } from 'configureStore';
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { ReactUIContext } from '@nstseek/react-ui/context';
+import DragoesContext from 'contexts/dragoesContext';
+import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Livro, LivroBase } from 'reducers/livros';
-import { createLivro, updateLivro } from 'reducers/livros/livros.actions';
 import Routes from 'routes';
-import createAlert from 'utils/modal-alert';
+import { DragaoBase } from 'typings/api';
+import API from 'utils/api';
 import './Cadastro.scss';
 
-interface Props {
-  livros: Livro[];
-  updateLivro(data: Livro);
-  createLivro(data: LivroBase);
-}
-
-export const formLivroConfig: FormBuilder<Omit<LivroBase, 'alugado'>> = {
-  titulo: {
+export const formDragaoConfig: FormBuilder<DragaoBase> = {
+  name: {
     initialValue: '',
-    validators: [required('título')],
+    validators: [required('nome')],
     inputOptions: {
-      label: 'Título',
+      label: 'Nome:',
       type: 'text',
-      placeholder: 'Digite aqui o título do livro'
+      placeholder: 'Digite aqui o nome do dragão'
     }
   },
-  autor: {
+  type: {
     initialValue: '',
-    validators: [required('autor')],
+    validators: [required('tipo')],
     inputOptions: {
-      label: 'Autor',
+      label: 'Tipo:',
       type: 'text',
-      placeholder: 'Digite aqui o autor do livro'
-    }
-  },
-  anoLancamento: {
-    initialValue: '',
-    validators: [required('ano de lançamento')],
-    inputOptions: {
-      label: 'Ano de lançamento',
-      type: 'text',
-      mask: '9999',
-      placeholder: 'Digite aqui o ano de lançamento do livro'
+      placeholder: 'Digite aqui o tipo do dragão'
     }
   }
 };
 
-export const Cadastro: React.FC<Props> = (props) => {
-  const formLivro = useForm(formLivroConfig);
+export const Cadastro: React.FC = () => {
+  const formDragao = useForm(formDragaoConfig);
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
-  const livro = id
-    ? props.livros.find((livro) => livro.id === Number(id))
-    : null;
+  const uiCtx = useContext(ReactUIContext);
+  const { dragoes } = useContext(DragoesContext);
+  const dragao = id ? dragoes.find((dragao) => dragao.id === id) : null;
 
   useEffect(() => {
-    if (livro && formLivro.state) {
-      formLivro.patchValue(livro);
+    if (dragao && formDragao.state) {
+      formDragao.patchValue(dragao);
     }
   }, []);
 
-  const saveLivro = () => {
-    if (!checkValidity(formLivro, createAlert)) {
+  const saveDragao = async () => {
+    if (!checkValidity(formDragao, uiCtx.addModal)) {
       return;
     }
-    if (livro) {
-      props.updateLivro({
-        ...livro,
-        ...formLivro.value
+
+    try {
+      uiCtx.pushLoading();
+      if (dragao) {
+        await API.put(`/${id}`, formDragao.value);
+      } else {
+        await API.post('', formDragao.value);
+      }
+    } catch (err) {
+      uiCtx.addModal({
+        desc: 'Erro ao salvar o dragão. Entre em contato com o suporte.',
+        title: 'Erro no serviço',
+        type: 'error'
       });
-    } else {
-      props.createLivro({
-        ...formLivro.value,
-        alugado: false
-      });
+    } finally {
+      uiCtx.popLoading();
     }
 
-    history.push(Routes.Livros);
+    history.push(Routes.Dragoes);
   };
   return (
     <div className='Cadastro'>
-      <h3 className='title'>{id ? 'Editar' : 'Cadastrar'} livro</h3>
+      <h3 className='title'>{id ? 'Editar' : 'Cadastrar'} dragão</h3>
       <div className='form'>
-        <Form form={formLivro} onEnter={saveLivro} />
+        <Form form={formDragao} onEnter={saveDragao} />
       </div>
       <div className='options'>
-        <button className='primary' id='save-livro' onClick={saveLivro}>
+        <button className='primary' id='save-dragao' onClick={saveDragao}>
           <i className='fas fa-save'></i>
           Salvar
         </button>
         <button
           className='primary'
-          id='cancel-livro'
-          onClick={() => history.push(Routes.Livros)}>
+          id='cancel-dragao'
+          onClick={() => history.push(Routes.Dragoes)}>
           <i className='fas fa-times'></i>
           Cancelar
         </button>
@@ -103,13 +92,4 @@ export const Cadastro: React.FC<Props> = (props) => {
   );
 };
 
-const mapStateToProps = ({ biblioteca }: AppState) => ({
-  livros: biblioteca.livros
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  createLivro: (data: LivroBase) => dispatch(createLivro(data)),
-  updateLivro: (data: Livro) => dispatch(updateLivro(data))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cadastro);
+export default Cadastro;
