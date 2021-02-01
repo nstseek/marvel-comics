@@ -4,9 +4,13 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Routes from 'routes';
 import './App.scss';
 import Login from 'pages/Login/Login';
-import Livros from 'pages/Livros/Livros';
+import Dragoes from 'pages/Dragoes/Dragoes';
 import LoginContext, { loginKey } from 'contexts/loginContext';
 import Cadastro from 'pages/Cadastro/Cadastro';
+import { ReactUIContext, useRootContext } from '@nstseek/react-ui/context';
+import { ModalWarning, Loading } from '@nstseek/react-ui/components';
+import DragoesContext from 'contexts/dragoesContext';
+import { Dragao } from 'typings/api';
 
 const particlesParam: IParticlesParams = {
   particles: {
@@ -77,46 +81,51 @@ const particlesParam: IParticlesParams = {
 const App: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem(loginKey));
   const history = useHistory();
+  const uiRootCtx = useRootContext();
+  const [dragoes, setDragoes] = useState<Dragao[]>([]);
+
   return (
-    <div className='App'>
-      <Particles className='particles' params={particlesParam} />
-      {loggedIn ? (
-        <span
-          className='logout'
-          onClick={() => {
-            sessionStorage.removeItem(loginKey);
-            setLoggedIn(false);
-            history.push(Routes.Login);
-          }}>
-          <i className='fas fa-times'></i>
-          Sair
-        </span>
-      ) : null}
-      <div className='main-container'>
-        <Switch>
-          {!loggedIn ? (
-            <>
+    <DragoesContext.Provider value={{ dragoes, setDragoes }}>
+      <ReactUIContext.Provider value={uiRootCtx}>
+        <ModalWarning />
+        <Loading />
+        <div className='App'>
+          <Particles className='particles' params={particlesParam} />
+          {loggedIn ? (
+            <span
+              className='logout'
+              onClick={() => {
+                sessionStorage.removeItem(loginKey);
+                setLoggedIn(false);
+                history.push(Routes.Login);
+              }}>
+              <i className='fas fa-times'></i>
+              Sair
+            </span>
+          ) : null}
+          <div className='main-container'>
+            <Switch>
               <Route path={Routes.Login}>
                 <LoginContext.Provider value={{ loggedIn, setLoggedIn }}>
                   <Login />
                 </LoginContext.Provider>
               </Route>
-              <Redirect to={Routes.Login} />
-            </>
-          ) : null}
-          <Route path={Routes.Livros}>
-            <Livros />
-          </Route>
-          <Route path={Routes.Cadastro + '/:id'}>
-            <Cadastro />
-          </Route>
-          <Route path={Routes.Cadastro}>
-            <Cadastro />
-          </Route>
-          <Redirect to={Routes.Livros} />
-        </Switch>
-      </div>
-    </div>
+              {!loggedIn ? <Redirect to={Routes.Login} /> : null}
+              <Route path={Routes.Dragoes}>
+                <Dragoes />
+              </Route>
+              <Route path={Routes.Cadastro + '/:id'}>
+                <Cadastro />
+              </Route>
+              <Route path={Routes.Cadastro}>
+                <Cadastro />
+              </Route>
+              <Redirect to={Routes.Dragoes} />
+            </Switch>
+          </div>
+        </div>
+      </ReactUIContext.Provider>
+    </DragoesContext.Provider>
   );
 };
 
