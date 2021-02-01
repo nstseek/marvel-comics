@@ -1,5 +1,6 @@
 import { ReactUIContext } from '@nstseek/react-ui/context';
 import DragoesContext from 'contexts/dragoesContext';
+import _ from 'lodash';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Routes from 'routes';
@@ -16,7 +17,9 @@ export const Dragoes: React.FC = () => {
   const fetchDragoes = async () => {
     try {
       uiCtx.pushLoading();
-      setDragoes((await API.get<DragaoModel[]>('')).data);
+      const response = await API.get<DragaoModel[]>('');
+      const newDragoes = _.sortBy(response.data, ['name', 'type']);
+      setDragoes(newDragoes);
     } catch (err) {
       uiCtx.addModal({
         desc: 'Erro ao buscar os dragões. Entre em contato com o suporte.',
