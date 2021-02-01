@@ -9,7 +9,7 @@ import {
 import { ReactUIContext } from '@nstseek/react-ui/context';
 import LoginContext, { loginKey } from 'contexts/loginContext';
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import Routes from 'routes';
 import './Login.scss';
 
@@ -56,7 +56,7 @@ const loginObj = {
 
 const Login: React.FC = () => {
   const formLogin = useForm(formLoginConfig);
-  const { setLoggedIn } = useContext(LoginContext);
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const history = useHistory();
   const uiCtx = useContext(ReactUIContext);
 
@@ -81,7 +81,9 @@ const Login: React.FC = () => {
     history.push(Routes.Dragoes);
   };
 
-  return (
+  return loggedIn ? (
+    <Redirect to={Routes.Dragoes} />
+  ) : (
     <div className='Login'>
       <h3 className='title'>Fazer login</h3>
       <div className='form'>
