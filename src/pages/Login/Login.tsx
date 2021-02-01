@@ -6,11 +6,11 @@ import {
   maxLength,
   checkValidity
 } from '@nstseek/react-forms/validators';
+import { ReactUIContext } from '@nstseek/react-ui/context';
 import LoginContext, { loginKey } from 'contexts/loginContext';
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Routes from 'routes';
-import createAlert from 'utils/modal-alert';
 import './Login.scss';
 
 interface Login {
@@ -49,19 +49,36 @@ export const formLoginConfig: FormBuilder<Login> = {
   }
 };
 
+const loginObj = {
+  login: 'teste@sicredi.com.br',
+  senha: 'Sicredi@2021'
+};
+
 const Login: React.FC = () => {
   const formLogin = useForm(formLoginConfig);
   const { setLoggedIn } = useContext(LoginContext);
   const history = useHistory();
+  const uiCtx = useContext(ReactUIContext);
 
   const logIn = () => {
-    if (!checkValidity(formLogin, createAlert)) {
+    if (!checkValidity(formLogin, uiCtx.addModal)) {
       return;
-    } else {
-      sessionStorage.setItem(loginKey, 'logged');
-      setLoggedIn(true);
-      history.push(Routes.Livros);
     }
+    if (
+      formLogin.value.password !== loginObj.senha ||
+      formLogin.value.username !== loginObj.login
+    ) {
+      uiCtx.addModal({
+        desc:
+          'Usuário ou senha incorretos. (Dica: o usuário é teste@sicredi.com.br e a senha é Sicredi@2021)',
+        title: 'Erro ao fazer login',
+        type: 'error'
+      });
+      return;
+    }
+    sessionStorage.setItem(loginKey, 'logged');
+    setLoggedIn(true);
+    history.push(Routes.Dragoes);
   };
 
   return (
