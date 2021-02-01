@@ -1,14 +1,10 @@
 div.App {
-  // $padding: 144px;
   position: fixed;
   top: 0;
   left: 0;
-  // padding: $padding;
   display: flex;
   justify-content: center;
   align-items: center;
-  // width: calc(100% - #{$padding * 2});
-  // height: calc(100% - #{$padding * 2});
   width: 100%;
   height: 100%;
   span.logout {
@@ -36,8 +32,6 @@ div.App {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid #777;
     border-radius: 15px;
-    min-width: 400px;
-    min-height: 200px;
     width: 60%;
     height: 60%;
     & > div {
@@ -54,4 +48,15 @@ div.App {
   right: 0;
   bottom: 0;
   z-index: -1;
+}
+
+@media screen and (max-width: 1024px) {
+  div.App div.main-container {
+    $side-margin: 21px;
+    $top-margin: 55px;
+    margin: $side-margin;
+    margin-top: $top-margin;
+    width: 100%;
+    height: calc(100% - #{($side-margin * 3) + $top-margin});
+  }
 }
