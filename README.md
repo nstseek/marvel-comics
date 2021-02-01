@@ -4,7 +4,7 @@ Essa aplicação foi desenvolvida para completar o teste técnico proposto para 
 
 ## Tecnologias
 
-Esse projeto foi desenvolvido utilizando algumas das mais recentes tecnologias como React (com Hooks e Context API), TypeScript, Jest, Enzyme, SCSS, Axios e algumas outras bibliotecas.
+Esse projeto foi desenvolvido utilizando algumas das mais recentes tecnologias como React (com Hooks e Context API), TypeScript, Jest, Enzyme, SCSS, Axios e algumas outras bibliotecas de minha autoria, como [@nstseek/react-forms](https://www.npmjs.com/package/@nstseek/react-forms) e [@nstseek/react-ui](https://www.npmjs.com/package/@nstseek/react-ui).
 
 ## Continuous Integration and Continuous Deployment (CI/CD)
 
