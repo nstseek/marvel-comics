@@ -11,6 +11,7 @@ import { ReactUIContext, useRootContext } from '@nstseek/react-ui/context';
 import { ModalWarning, Loading } from '@nstseek/react-ui/components';
 import DragoesContext from 'contexts/dragoesContext';
 import { Dragao } from 'typings/api';
+import 'moment/locale/pt-br';
 
 const particlesParam: IParticlesParams = {
   particles: {

@@ -1,4 +1,5 @@
 import { ReactUIContext } from '@nstseek/react-ui/context';
+import moment from 'moment';
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Routes from 'routes';
@@ -74,6 +75,10 @@ export const Dragao: React.FC<Props> = (props) => {
       <div className={detailsClass}>
         <span className='detail'>
           <span className='detail-title'>Tipo:</span> {props.dragao.type}
+        </span>
+        <span className='detail'>
+          <span className='detail-title'>Data de criação:</span>{' '}
+          {moment(props.dragao.createdAt).utcOffset(0).format('LLL')}
         </span>
       </div>
     </div>
