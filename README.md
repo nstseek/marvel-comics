@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+# Catálogo de dragões
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Essa aplicação foi desenvolvida para completar o teste técnico proposto para a vaga de desenvolvedor front-end. Você pode visualizar a aplicação funcionando em [https://softdesign-catalogo-dragoes.web.app/dragoes](https://softdesign-catalogo-dragoes.web.app/dragoes). Você também pode visualizar o estado das builds e deploys de cada commit visualizando o histórico de commits [aqui](https://github.com/nstseek/catalogo-dragoes/commits/master) ou vendo o estado dos workflows do repositório [aqui](https://github.com/nstseek/catalogo-dragoes/actions).
 
-## Available Scripts
+## Tecnologias
 
-In the project directory, you can run:
+Esse projeto foi desenvolvido utilizando algumas das mais recentes tecnologias como React (com Hooks e Context API), TypeScript, Jest, Enzyme, SCSS, Axios e algumas outras bibliotecas.
 
-### `npm start`
+## Continuous Integration and Continuous Deployment (CI/CD)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Um [processo de CI/CD simples](https://github.com/nstseek/catalogo-dragoes/actions?query=workflow%3A%22Deploy+to+Firebase+Hosting+on+merge%22) foi implementado nesse projeto utilizando as Actions do GitHub. Toda vez que algum commit é adicionado a master, o projeto passa por sua bateria de testes, é buildado e deployado no firebase, podendo ser visualizado no [endereço mencionado acima](https://github.com/nstseek/catalogo-dragoes/actions).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Testes
 
-### `npm test`
+A cobertura de testes unitários está bem precária por falta de tempo, o único componente que possui alguns casos de teste reais apenas para exemplificar e comprovar conhecimento é o componente de [Login](https://github.com/nstseek/catalogo-dragoes/blob/master/src/pages/Login/Login.test.tsx). Como é um projeto de teste apenas, não vejo necessidade de cobrir o projeto inteiro com testes unitários pois demandaria tempo que não tenho disponível.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+O resultado dos testes de cada commit é publicado utilizando o GitHub Actions logo após rodarem, como você pode ver [aqui](https://github.com/nstseek/catalogo-dragoes/runs/1804083211).
 
-### `npm run build`
+## Flow de trabalho
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+O projeto possui uma série de filtros para garantir a qualidade do código criado, como [linters](https://eslint.org/), [formatters](https://prettier.io/) e [testes unitários](https://jestjs.io/en/) com [framework específico](https://enzymejs.github.io/enzyme/) que rodam toda vez que o desenvolvedor tenta realizar o push para o repositório através dos git hooks. Esse projeto utiliza o pacote [husky](https://www.npmjs.com/package/husky) que torna muito simples a configuração de git hooks em qualquer repositório Git. Toda vez que o desenvolvedor tenta realizar o push, o script [npm run check](https://github.com/nstseek/catalogo-dragoes/blob/5e0b1780bf86f23bad5d54f915c2e5c147a49bde/package.json#L44) [roda antes que o push seja efetuado](https://github.com/nstseek/catalogo-dragoes/blob/5e0b1780bf86f23bad5d54f915c2e5c147a49bde/package.json#L92), garantindo que o código que está sendo enviado passa em todos os testes e builda corretamente.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Scripts disponíveis
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### npm start
 
-### `npm run eject`
+Inicia o projeto na sua máquina local.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### npm run build
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Cria um build do projeto para ser servido.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### npm run eject
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Ejeta toda a articulação do create-react-app que não é totalmente visível/manipulável para o desenvolvedor final.
 
-## Learn More
+### npm test
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Executa todos os testes unitários do projeto.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### npm run test:watch
+
+Executa todos os testes unitários do projeto em modo de observação.
+
+
+### npm run test:report
+
+Executa todos os testes unitários do projeto e gera um report para ser publicado com o GitHub Actions.
+
+### npm run prettier
+
+Executa o [formatter](https://prettier.io/) instalado no projeto para verificar os arquivos existentes.
+
+### npm run prettier:fix
+
+Executa o [formatter](https://prettier.io/) instalado no projeto para corrigir os erros nos arquivos existentes.
+
+### npm run lint
+
+Executa o [linter](https://eslint.org/) instalado no projeto para verificar os arquivos existentes.
+
+### npm run lint:fix
+
+Executa o [linter](https://eslint.org/) instalado no projeto para corrigir os  erros nos arquivos existentes.
+
+### npm run check
+
+Executa uma verificação completa no projeto, incluindo o linter, formatter, os testes unitários e o build.
+
+### npm run check:ci
+
+Executa uma verificação completa no projeto destinada para um ambiente CI, incluindo o linter, formatter, os testes unitários (gerando um report para publicação) e o build.
+
+### npm run check:fix
+
+Executa uma verificação completa no projeto, incluindo o linter, formatter, os testes unitários e o build, corrigindo os erros passíveis de correção automática com o linter e o formatter.
