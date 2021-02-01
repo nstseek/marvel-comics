@@ -1,5 +1,5 @@
 const Routes = {
-  Livros: '/livros',
+  Dragoes: '/dragoes',
   Login: '/login',
   Cadastro: '/cadastro'
 };
