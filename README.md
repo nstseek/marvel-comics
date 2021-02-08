@@ -1,6 +1,6 @@
 # Quadrinhos da Marvel
 
-Essa aplicação foi desenvolvida para completar o teste técnico proposto para a vaga de desenvolvedor front-end. Você pode visualizar a aplicação funcionando em [https://softdesign-marvel-comics.web.app/dragoes](https://softdesign-marvel-comics.web.app/dragoes). Você também pode visualizar o estado das builds e deploys de cada commit visualizando o histórico de commits [aqui](https://github.com/nstseek/marvel-comics/commits/master) ou vendo o estado dos workflows do repositório [aqui](https://github.com/nstseek/marvel-comics/actions).
+Essa aplicação foi desenvolvida para completar o teste técnico proposto para a vaga de desenvolvedor front-end. Você pode visualizar a aplicação funcionando em [https://softdesign-marvel-comics.web.app/](https://softdesign-marvel-comics.web.app/). Você também pode visualizar o estado das builds e deploys de cada commit visualizando o histórico de commits [aqui](https://github.com/nstseek/marvel-comics/commits/master) ou vendo o estado dos workflows do repositório [aqui](https://github.com/nstseek/marvel-comics/actions).
 
 ## Tecnologias
 
@@ -12,7 +12,7 @@ Um [processo de CI/CD simples](https://github.com/nstseek/marvel-comics/actions?
 
 ## Testes
 
-A cobertura de testes unitários está bem precária por falta de tempo, o único componente que possui alguns casos de teste reais apenas para exemplificar e comprovar conhecimento é o componente de [Login](https://github.com/nstseek/marvel-comics/blob/master/src/pages/Login/Login.test.tsx). Como é um projeto de teste apenas, não vejo necessidade de cobrir o projeto inteiro com testes unitários pois demandaria tempo que não tenho disponível.
+A cobertura de testes unitários está bem precária por falta de tempo para desenvolvê-la. Como é um projeto de teste apenas, não vejo necessidade de cobrir o projeto inteiro com testes unitários pois demandaria tempo que não tenho disponível.
 
 O resultado dos testes de cada commit é publicado utilizando o GitHub Actions logo após rodarem, como você pode ver [aqui](https://github.com/nstseek/marvel-comics/runs/1804083211).
 
