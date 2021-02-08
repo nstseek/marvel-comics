@@ -1,41 +1,146 @@
 /**
- * This is the base interface for the Dragon model.
- * This model is the base for the complete API dragon model.
- * This should be used to create PUT/POST calls, containing only useful fields for the user, without ids or createdAt fields
+ * This is the boilerplate for every response that comes from the API
+ * The data property will have the requested content, other properties are just stats from the request that you just did
+ * @param T - The content type in data property returned from the API
  */
-export interface DragaoBase {
-  /**
-   * This is the dragon's name
-   */
-  name: string;
-  /**
-   * This is the dragon's type
-   */
-  type: string;
+interface ApiResponse<T = any> {
+  code: number;
+  status: string;
+  copyright: string;
+  attributionText: string;
+  attributionHTML: string;
+  data: {
+    offset: number;
+    limit: number;
+    total: number;
+    count: number;
+    results: T[];
+  };
+  etag: string;
 }
 
 /**
- * This is the interface for the Dragon model.
- * This model is the only one used in the application as far as I know.
+ * This is the default content that will be returned when you fetch comics from the API
  */
-export interface Dragao extends DragaoBase {
-  /**
-   * This is the object's id.
-   * This probably should be a number because the API always creates a number to fill the ID but returns the number as a string.
-   */
-  id: string;
-  /**
-   * This is a date string containing the object's creation date
-   */
-  createdAt: string;
-  /**
-   * There's no information about this array, every existent dragon has a empty array here
-   * Probably shouldn't be used, do what you want at your own risk
-   */
-  histories?: [];
-  /**
-   * This seems like a random variable, some dragons have this, some don't, sometimes it's an array, sometimes it's an object, very random, no info about it.
-   * The backend is probably using NoSQL like MongoDB that allows you to save anything in the variable, without restrictions.
-   */
-  dragon?: Dragao | Dragao[];
+export interface Comic {
+  id: number;
+  digitalId: number;
+  title: string;
+  issueNumber: number;
+  variantDescription: string;
+  description?: string;
+  modified: string;
+  isbn: string;
+  upc: string;
+  diamondCode: string;
+  ean: string;
+  issn: string;
+  format: string;
+  pageCount: number;
+  textObjects: {
+    type: string;
+    language: string;
+    text: string;
+  }[];
+  resourceURI: string;
+  urls: {
+    type: string;
+    url: string;
+  }[];
+  series: {
+    resourceURI: string;
+    name: string;
+  };
+  variants: {
+    resourceURI: string;
+    name: string;
+  }[];
+  collections: {
+    resourceURI: string;
+    name: string;
+  }[];
+  collectedIssues: {
+    resourceURI: string;
+    name: string;
+  }[];
+  dates: {
+    type: string;
+    date: string;
+  }[];
+  prices: {
+    type: string;
+    price: number;
+  }[];
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  images: {
+    path: string;
+    extension: string;
+  }[];
+  creators: {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: {
+      resourceURI: string;
+      name: string;
+      role: string;
+    }[];
+  };
+  characters: {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: {
+      resourceURI: string;
+      name: string;
+      role: string;
+    }[];
+  };
+  stories: {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: {
+      resourceURI: string;
+      name: string;
+      type: string;
+    }[];
+  };
+  events: {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: {
+      resourceURI: string;
+      name: string;
+    }[];
+  };
+}
+
+/**
+ * This is the complete response from the API when you are requesting comics
+ */
+export type ComicResponse = ApiResponse<Comic>;
+
+/**
+ * This is the params that you can send in the comic request
+ *
+ * There are many more available params, we only have the ones that we're using here
+ */
+export interface ComicParams {
+  apikey: string;
+  titleStartsWith?: string;
+  format?:
+    | 'comic'
+    | 'magazine'
+    | 'trade paperback'
+    | 'hardcover'
+    | 'digest'
+    | 'graphic novel'
+    | 'digital comic'
+    | 'infinite comic';
+  formatType?: 'comic' | 'collection';
 }
