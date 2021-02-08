@@ -6,7 +6,7 @@ describe('<Comic />', () => {
   let component;
 
   beforeEach(() => {
-    component = shallow(<Comic />);
+    component = shallow(<Comic comic={{thumbnail: {}} as any} addComic={() => null} removeComic={() => null} />);
   });
 
   test('It should mount', () => {
