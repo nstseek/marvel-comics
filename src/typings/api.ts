@@ -143,4 +143,6 @@ export interface ComicParams {
     | 'digital comic'
     | 'infinite comic';
   formatType?: 'comic' | 'collection';
+  limit?: number;
+  offset?: number;
 }

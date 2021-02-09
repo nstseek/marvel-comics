@@ -37,11 +37,26 @@ div.ComicList {
       border-bottom: $border;
     }
   }
-  h5.result-info {
-    margin: 8px 0;
+  div.controls {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    div.mail-buttons {
+      display: flex;
+      flex-direction: column;
+      & > button {
+        margin: 8px 0;
+      }
+    }
+    div.navigators {
+      display: flex;
+      & > button {
+        font-size: 15pt;
+        margin: auto 8px;
+      }
+    }
   }
-  button.send-email {
-    width: 120px;
+  h5.result-info {
     margin: 8px 0;
   }
 }

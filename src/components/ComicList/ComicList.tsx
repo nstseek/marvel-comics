@@ -22,10 +22,17 @@ const ComicList: React.FC = () => {
   const [openComic, setOpenComic] = useState<ComicModel>(null);
   const uiCtx = useContext(ReactUIContext);
   const latestFetch = useRef<CancelTokenSource>(null);
+  const pageSize = 20;
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(null);
 
   useEffect(() => {
     fetchComics();
     return () => latestFetch.current.cancel(cancelMessage);
+  }, [page]);
+
+  useEffect(() => {
+    setPage(1);
   }, [query]);
 
   const fetchComics = async () => {
@@ -36,9 +43,11 @@ const ComicList: React.FC = () => {
         apikey: '2039859d947cf31356a41e66a4dcb442',
         format: 'comic',
         formatType: 'comic',
+        offset: (page - 1) * pageSize,
+        limit: pageSize,
         ...(query ? { titleStartsWith: query } : null)
       };
-      const response = await axios.get(
+      const response = await axios.get<ComicResponse>(
         'https://gateway.marvel.com/v1/public/comics',
         {
           params,
@@ -46,6 +55,7 @@ const ComicList: React.FC = () => {
         }
       );
       setComics(response.data);
+      setTotalPages(Math.ceil(response.data.data.total / pageSize));
     } catch (err) {
       if (err?.message !== cancelMessage) {
         uiCtx.addModal({
@@ -166,14 +176,50 @@ const ComicList: React.FC = () => {
         <h5 className='result-info'>
           Mostrando de {comics.data.offset + 1} a{' '}
           {comics.data.offset + comics.data.count} de um total de{' '}
-          {comics.data.total} - {comics.data.limit} por página
+          {comics.data.total} - {comics.data.limit} por página - {totalPages}{' '}
+          páginas
         </h5>
       ) : null}
-      {selectedComics.length ? (
-        <button className='send-email' onClick={sendEmail}>
-          Enviar email
-        </button>
-      ) : null}
+      <div className='controls'>
+        {comics?.data ? (
+          <div className='navigators'>
+            <button
+              className='page-switcher'
+              onClick={() =>
+                setPage((previousState) => {
+                  if (previousState === 1) {
+                    return previousState;
+                  } else {
+                    return previousState - 1;
+                  }
+                })
+              }>
+              {'<'}
+            </button>
+            <button
+              className='page-switcher'
+              onClick={() =>
+                setPage((previousState) => {
+                  if (previousState === totalPages) {
+                    return previousState;
+                  } else {
+                    return previousState + 1;
+                  }
+                })
+              }>
+              {'>'}
+            </button>
+          </div>
+        ) : null}
+        {selectedComics.length ? (
+          <div className='mail-buttons'>
+            <button onClick={sendEmail}>Enviar email</button>
+            <button onClick={() => setSelectedComics([])}>
+              Desmarcar todos
+            </button>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };
