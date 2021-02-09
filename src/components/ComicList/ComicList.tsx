@@ -23,7 +23,7 @@ const ComicList: React.FC = () => {
   const uiCtx = useContext(ReactUIContext);
   const latestFetch = useRef<CancelTokenSource>(null);
   const pageSize = 20;
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState({ value: 1 });
   const [totalPages, setTotalPages] = useState(null);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const ComicList: React.FC = () => {
   }, [page]);
 
   useEffect(() => {
-    setPage(1);
+    setPage({ value: 1 });
   }, [query]);
 
   const fetchComics = async () => {
@@ -43,7 +43,7 @@ const ComicList: React.FC = () => {
         apikey: '2039859d947cf31356a41e66a4dcb442',
         format: 'comic',
         formatType: 'comic',
-        offset: (page - 1) * pageSize,
+        offset: (page.value - 1) * pageSize,
         limit: pageSize,
         ...(query ? { titleStartsWith: query } : null)
       };
@@ -187,10 +187,10 @@ const ComicList: React.FC = () => {
               className='page-switcher'
               onClick={() =>
                 setPage((previousState) => {
-                  if (previousState === 1) {
+                  if (previousState.value === 1) {
                     return previousState;
                   } else {
-                    return previousState - 1;
+                    return { value: previousState.value - 1 };
                   }
                 })
               }>
@@ -203,7 +203,7 @@ const ComicList: React.FC = () => {
                   if (previousState === totalPages) {
                     return previousState;
                   } else {
-                    return previousState + 1;
+                    return { value: previousState.value + 1 };
                   }
                 })
               }>
