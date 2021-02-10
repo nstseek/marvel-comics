@@ -1,6 +1,6 @@
 # Quadrinhos da Marvel
 
-![CI/CD](https://github.com/nstseek/marvel-comics/workflows/CI/CD/badge.svg?branch=master)
+[![CI/CD](https://github.com/nstseek/marvel-comics/workflows/CI/CD/badge.svg?branch=master)](https://github.com/nstseek/marvel-comics/actions?query=workflow%3ACI%2FCD)
 
 Essa aplicação foi desenvolvida para completar o teste técnico proposto para a vaga de desenvolvedor front-end. Você pode visualizar a aplicação funcionando em [https://nstseek.github.io/marvel-comics/](https://nstseek.github.io/marvel-comics/). Você também pode visualizar o estado das builds e deploys de cada commit visualizando o histórico de commits [aqui](https://github.com/nstseek/marvel-comics/commits/master) ou vendo o estado dos workflows do repositório [aqui](https://github.com/nstseek/marvel-comics/actions).
 
