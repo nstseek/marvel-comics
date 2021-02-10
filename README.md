@@ -1,6 +1,6 @@
 # Quadrinhos da Marvel
 
-Essa aplicação foi desenvolvida para completar o teste técnico proposto para a vaga de desenvolvedor front-end. Você pode visualizar a aplicação funcionando em [https://softdesign-marvel-comics.web.app/](https://softdesign-marvel-comics.web.app/). Você também pode visualizar o estado das builds e deploys de cada commit visualizando o histórico de commits [aqui](https://github.com/nstseek/marvel-comics/commits/master) ou vendo o estado dos workflows do repositório [aqui](https://github.com/nstseek/marvel-comics/actions).
+Essa aplicação foi desenvolvida para completar o teste técnico proposto para a vaga de desenvolvedor front-end. Você pode visualizar a aplicação funcionando em [https://nstseek.github.io/marvel-comics/](https://nstseek.github.io/marvel-comics/). Você também pode visualizar o estado das builds e deploys de cada commit visualizando o histórico de commits [aqui](https://github.com/nstseek/marvel-comics/commits/master) ou vendo o estado dos workflows do repositório [aqui](https://github.com/nstseek/marvel-comics/actions).
 
 ## Tecnologias
 
@@ -8,7 +8,7 @@ Esse projeto foi desenvolvido utilizando algumas das mais recentes tecnologias c
 
 ## Continuous Integration and Continuous Deployment (CI/CD)
 
-Um [processo de CI/CD simples](https://github.com/nstseek/marvel-comics/actions?query=workflow%3A%22Deploy+to+Firebase+Hosting+on+merge%22) foi implementado nesse projeto utilizando as Actions do GitHub. Toda vez que algum commit é adicionado a master, o projeto passa por sua bateria de testes, é buildado e deployado no firebase, podendo ser visualizado no [endereço mencionado acima](https://github.com/nstseek/marvel-comics/actions).
+Um [processo de CI/CD simples](https://github.com/nstseek/marvel-comics/actions?query=workflow%3A%22Deploy+to+GitHub+Pages+Hosting+on+merge%22) foi implementado nesse projeto utilizando as Actions do GitHub. Toda vez que algum commit é adicionado a master, o projeto passa por sua bateria de testes, é buildado e deployado no GitHub Pages, podendo ser visualizado no [endereço mencionado acima](https://github.com/nstseek/marvel-comics/actions).
 
 ## Testes
 
