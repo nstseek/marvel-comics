@@ -1,5 +1,7 @@
 # Quadrinhos da Marvel
 
+![CI/CD](https://github.com/nstseek/marvel-comics/workflows/CI/CD/badge.svg?branch=master)
+
 Essa aplicação foi desenvolvida para completar o teste técnico proposto para a vaga de desenvolvedor front-end. Você pode visualizar a aplicação funcionando em [https://nstseek.github.io/marvel-comics/](https://nstseek.github.io/marvel-comics/). Você também pode visualizar o estado das builds e deploys de cada commit visualizando o histórico de commits [aqui](https://github.com/nstseek/marvel-comics/commits/master) ou vendo o estado dos workflows do repositório [aqui](https://github.com/nstseek/marvel-comics/actions).
 
 ## Tecnologias
@@ -8,15 +10,15 @@ Esse projeto foi desenvolvido utilizando algumas das mais recentes tecnologias c
 
 ## Documentação
 
-O projeto possui uma cobertura de documentação razoável utilizando JSDOC em cada componente e interface relevante da aplicação. Caso a sua IDE suporte, basta você passar o mouse sobre um componente e verá uma descrição a respeito do mesmo, explicando qual o propósito daquele componente/variável/interface. Segue um exemplo no link abaixo para demonstrar a funcionalidade funcionando no Visual Studio Code
+O projeto possui uma cobertura de documentação razoável utilizando [JSDOC](https://jsdoc.app/) em cada componente e interface relevante da aplicação. Caso a sua IDE suporte, basta você passar o mouse sobre um componente e verá uma descrição a respeito do mesmo, explicando qual o propósito daquele componente/variável/interface. Segue um exemplo no link abaixo para demonstrar a funcionalidade funcionando no Visual Studio Code
 
 ![JSDOC example](src/assets/Screenshot_1.png?raw=true 'JSDOC example')
 
-Caso a sua IDE não suporte a notação JSDOM, basta ler o comentário sobre a declaração do componente/váriavel/interface. A documentação foi escrita em inglês por costume próprio e porque a aplicação está disponível no meu perfil do GitHub, o qual é voltado mais pra área internacional(inglês) do que nacional(português).
+Caso a sua IDE não suporte a notação [JSDOC](https://jsdoc.app/), basta ler o comentário sobre a declaração do componente/váriavel/interface. A documentação foi escrita em inglês por costume próprio e porque a aplicação está disponível no meu perfil do GitHub, o qual é voltado mais pra área internacional(inglês) do que nacional(português).
 
 ## Continuous Integration and Continuous Deployment (CI/CD)
 
-Um [processo de CI/CD simples](https://github.com/nstseek/marvel-comics/actions?query=workflow%3A%22Deploy+to+GitHub+Pages+Hosting+on+merge%22) foi implementado nesse projeto utilizando as Actions do GitHub. Toda vez que algum commit é adicionado a master, o projeto passa por sua bateria de testes, é buildado e deployado no GitHub Pages, podendo ser visualizado no [endereço mencionado acima](https://github.com/nstseek/marvel-comics/actions).
+Um [processo de CI/CD simples](https://github.com/nstseek/marvel-comics/actions?query=workflow%3ACI%2FCD) foi implementado nesse projeto utilizando as Actions do GitHub. Toda vez que algum commit é adicionado a master, o projeto passa por sua bateria de testes, é buildado e deployado no GitHub Pages, podendo ser visualizado no [endereço mencionado acima](https://github.com/nstseek/marvel-comics/actions).
 
 ## Testes
 
