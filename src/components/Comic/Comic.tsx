@@ -10,6 +10,14 @@ interface Props {
   selected: boolean;
 }
 
+/**
+ * This component is a small card that shows the basic info for the comic provided, allowing the user to click on it, triggering an event that can show more details
+ * @param comic - The comic to be displayed
+ * @param addComic - The function to be called when the comic gets checked
+ * @param removeComic - The function to be called when the comic gets unchecked
+ * @param openComic - The function to be called when the comic gets clicked
+ * @param selected - Indicates if this comic is selected
+ */
 const Comic: React.FC<Props> = ({
   comic,
   addComic,

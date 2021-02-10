@@ -21,6 +21,11 @@ const Field = (label, content) => (
   </p>
 );
 
+/**
+ * This component provides more information about a comic opening in a popup so the user can see a bigger cover, the title, characters, creators and more
+ * @param comic - The comic to be displayed
+ * @param close - The function to be called when a close event is emitted
+ */
 const ComicDetails: React.FC<Props> = ({ comic, close }) => (
   <Backdrop onBackdropClick={close}>
     <div className='ComicDetails'>

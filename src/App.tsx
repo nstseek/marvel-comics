@@ -7,6 +7,9 @@ import ComicList from 'components/ComicList/ComicList';
 import Loading from 'components/Loading/Loading';
 import 'moment/locale/pt-br';
 
+/**
+ * Holds the configuration for the particle background that you can see in the application
+ */
 const particlesParam: IParticlesParams = {
   particles: {
     number: {

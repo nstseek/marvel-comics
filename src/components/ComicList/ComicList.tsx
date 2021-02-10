@@ -15,6 +15,10 @@ import './ComicList.scss';
 
 const cancelMessage = 'Cancelled intentionally';
 
+/**
+ * This component holds all the logic to fetch and search for comics
+ * It also holds the logic for selecting comics and building an email to be sent by the final user
+ */
 const ComicList: React.FC = () => {
   const [comics, setComics] = useState<ComicResponse>(null);
   const [query, setQuery] = useState('');
@@ -110,7 +114,7 @@ const ComicList: React.FC = () => {
       Para poder fazer o embed da imagem direto você precisaria definir o MIME type do corpo da mensagem como text/html
       e então utilizar um elemento <img> no corpo da mensagem colocando a URL da imagem no src do elemento.
 
-      Como plain/text, o elemento será considerado como texto normal e você terá um <img> indesejado no corpo do email.
+      Como plain/text, o elemento será considerado como texto normal e você terá um <img> em texto indesejado no corpo do email.
 
       Sendo assim, coloquei apenas o link para a imagem no email, você pode ler mais a respeito no link abaixo:
       https://stackoverflow.com/questions/35033785/gmail-mailto-with-images-and-links
