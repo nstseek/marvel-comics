@@ -9,7 +9,8 @@ Esse projeto foi desenvolvido utilizando algumas das mais recentes tecnologias c
 ## Documentação
 
 O projeto possui uma cobertura de documentação razoável utilizando JSDOC em cada componente e interface relevante da aplicação. Caso a sua IDE suporte, basta você passar o mouse sobre um componente e verá uma descrição a respeito do mesmo, explicando qual o propósito daquele componente/variável/interface. Segue um exemplo no link abaixo para demonstrar a funcionalidade funcionando no Visual Studio Code
-![JSDOC example](assets/Screenshot_1.jpg?raw=true 'JSDOC example')
+
+![JSDOC example](src/assets/Screenshot_1.png?raw=true 'JSDOC example')
 
 Caso a sua IDE não suporte a notação JSDOM, basta ler o comentário sobre a declaração do componente/váriavel/interface. A documentação foi escrita em inglês por costume próprio e porque a aplicação está disponível no meu perfil do GitHub, o qual é voltado mais pra área internacional(inglês) do que nacional(português).
 
